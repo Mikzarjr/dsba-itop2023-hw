@@ -1,0 +1,3 @@
+/Users/mikzar/Documents/GitHub/BigHWmz/cmake-build-debug/CMakeFiles/BigHWmz.dir
+/Users/mikzar/Documents/GitHub/BigHWmz/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/mikzar/Documents/GitHub/BigHWmz/cmake-build-debug/CMakeFiles/rebuild_cache.dir
