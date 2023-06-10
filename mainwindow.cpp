@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), addRowDialog(nullptr)
 {
     csvModel = new CsvModel(this);
-    csvModel->loadCsv("/Users/mikzar/Desktop/BigHW/album_ratings.csv");
+    csvModel->loadCsv("REPLACE/WITH/YOUR/PATH/TO/CSV/FILE");
 
     tableView = new QTableView(this);
     tableView->setSortingEnabled(true);
