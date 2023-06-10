@@ -14,6 +14,7 @@ public:
     void loadCsv(const QString &filename);
     bool saveCsv(const QString &filePath);
     void addRow(const QStringList& rowData);
+    void removeRow(int row);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;
