@@ -1,10 +1,11 @@
-#include <iostream>
+#include "mainwindow.h"
 
-using std::cout, std::cin;
+#include <QApplication>
 
-int main()
+int main(int argc, char *argv[])
 {
-    std::string name;
-    cin >> name;
-    cout << "Hi," << name << "! \nThis is my project";
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+    return a.exec();
 }
