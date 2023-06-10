@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), addRowDialog(nullptr)
 {
     csvModel = new CsvModel(this);
-    csvModel->loadCsv("/Users/mikzar/Desktop/BigHW/album_ratings.csv");
+    csvModel->loadCsv("CHANGE TO YOUR PATH TO CSV");
 
     tableView = new QTableView(this);
     tableView->setSortingEnabled(true);
@@ -142,7 +142,7 @@ void MainWindow::deleteRow()
         QMessageBox::StandardButton confirmation = QMessageBox::question(this, "Delete Row", "Are you sure you want to delete the album \"" + albumName + "\"?", QMessageBox::Yes | QMessageBox::No);
         if (confirmation == QMessageBox::Yes) {
             csvModel->removeRow(row);
-            csvModel->saveCsv("/Users/mikzar/Desktop/BigHW/album_ratings.csv");
+            csvModel->saveCsv("CHANGE TO YOUR PATH TO CSV");
         }
     }
 }
@@ -181,7 +181,7 @@ void MainWindow::openAddRowDialog()
                                        << metacriticReviews << metacriticUserScore << metacriticUserReviews << aotyCriticScore
                                        << aotyCriticReviews << aotyUserScore << aotyUserReviews);
 
-        csvModel->saveCsv("/Users/mikzar/Desktop/BigHW/album_ratings.csv");
+        csvModel->saveCsv("CHANGE TO YOUR PATH TO CSV");
 
         tableView->scrollToTop();
     }
