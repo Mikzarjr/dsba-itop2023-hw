@@ -31,6 +31,7 @@ private slots:
     void resetTable();
     void showFavorites();
     void openAddRowDialog();
+    void deleteRow();
 
 private:
     CsvModel *csvModel;
