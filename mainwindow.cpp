@@ -12,6 +12,8 @@
 #include <QStackedWidget>
 #include <QDate>
 #include <QSet>
+#include <QMessageBox>
+#include <QModelIndexList>
 
 
 
@@ -19,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), addRowDialog(nullptr)
 {
     csvModel = new CsvModel(this);
-    csvModel->loadCsv("REPLACE/WITH/YOUR/PATH/TO/CSV/FILE");
+    csvModel->loadCsv("/Users/mikzar/Desktop/BigHW/album_ratings.csv");
 
     tableView = new QTableView(this);
     tableView->setSortingEnabled(true);
@@ -73,13 +75,17 @@ MainWindow::MainWindow(QWidget *parent)
     QPushButton *addRowButton = new QPushButton("Add Row", this);
 
     QPushButton *favoritesButton = new QPushButton("Favorites", this);
-
     favoritesButton->setFixedSize(size, categoryBox->height());
+
+    QPushButton *deleteRowButton = new QPushButton("Delete Row", this);
+    deleteRowButton->setFixedSize(200, 30);
+
 
     topLayout->addWidget(aboutButton, 0, Qt::AlignLeft);
     bottomLayout->addWidget(resetButton, 0, Qt::AlignLeft);
 
     bottomLayout->addWidget(favoritesButton, 0, Qt::AlignCenter);
+    topLayout->addWidget(deleteRowButton, 0, Qt::AlignCenter);
 
     topLayout->addWidget(categoryBox, 0,  Qt::AlignRight);
     bottomLayout->addWidget(searchBar, 0, Qt::AlignRight);
@@ -120,7 +126,28 @@ MainWindow::MainWindow(QWidget *parent)
     connect(aboutButton, &QPushButton::clicked, this, [=]() {
         aboutWindow->exec();
     });
+    connect(deleteRowButton, &QPushButton::clicked, this, &MainWindow::deleteRow);
+
 }
+
+void MainWindow::deleteRow()
+{
+    QModelIndexList selectedIndexes = tableView->selectionModel()->selectedIndexes();
+
+    if (!selectedIndexes.isEmpty()) {
+        QModelIndex sourceIndex = proxyModel->mapToSource(selectedIndexes.first());
+        int row = sourceIndex.row();
+        QString albumName = csvModel->index(row, 1).data().toString();
+
+        QMessageBox::StandardButton confirmation = QMessageBox::question(this, "Delete Row", "Are you sure you want to delete the album \"" + albumName + "\"?", QMessageBox::Yes | QMessageBox::No);
+        if (confirmation == QMessageBox::Yes) {
+            csvModel->removeRow(row);
+            csvModel->saveCsv("/Users/mikzar/Desktop/BigHW/album_ratings.csv");
+        }
+    }
+}
+
+
 
 
 void MainWindow::openAddRowDialog()
