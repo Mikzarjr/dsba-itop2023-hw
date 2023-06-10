@@ -64,6 +64,15 @@ bool CsvModel::saveCsv(const QString &filePath)
     return true;
 }
 
+void CsvModel::removeRow(int row)
+{
+    beginRemoveRows(QModelIndex(), row, row);
+    m_data.removeAt(row);
+    endRemoveRows();
+}
+
+
+
 void CsvModel::addRow(const QStringList& rowData)
 {
     beginInsertRows(QModelIndex(), 0, 0);
